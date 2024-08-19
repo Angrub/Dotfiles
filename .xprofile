@@ -1,0 +1,25 @@
+# Screens
+displays=`xrandr | grep -c ' connected'`
+
+if [ "$displays" = "3" ]; then
+  xrandr --output DP-1 --mode 1920x1080 --pos 0x0 --output eDP-1 --mode 1920x1080 --pos 1920x0 --scale 0.65x0.65 --output HDMI-1 --primary --mode 1920x1080 --pos 3168x0 &
+elif [ "$displays" = "2" ]; then
+  xrandr --output eDP-1 --mode 1920x1080 --pos 0x0 --scale 0.65x0.65 --output HDMI-1 --primary --mode 1920x1080 --pos 1920x0 &
+else
+  xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --scale 0.9x0.9 --output HDMI-1 --off --output DP-1 --off &
+fi
+
+# Composer
+picom &
+# Network
+nm-applet &
+# Keyboard Layout
+setxkbmap latam &
+# Wallpaper
+feh --bg-scale Images/wallpapers/tianshu-liu-aqZ3UAjs_M4-unsplash.jpg &
+# Automount Devices
+udiskie -t &
+# systray battery icon
+cbatticon -u 5 &
+# systray volume
+volumeicon &
